@@ -10,9 +10,9 @@ const jwtMiddleware = async (req, res, next) => {
     }
 
     const token = authHeader.substring(7);
-    const JWT_SECRET = process.env.JWT_SECRET || 'your-laravel-jwt-secret-key';
+    const JWT_SECRET = process.env.JWT_SECRET;
     
-    const decoded = jwt.verify(token, JWT_SECRET);
+    const decoded = jwt.verify(token, JWT_SECRET, {algorithms: ['HS256']});
     req.user = decoded;
     
     next();
